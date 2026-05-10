@@ -1,36 +1,149 @@
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will you be my Valentine? 💕</title>
+    <title>Sıla, benim hayat arkadaşım olur musun? 💕</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
     <div class="hearts-bg"></div>
 
     <div class="container">
-        <h1>Will you be my Valentine? 💕</h1>
+
+        <h1>Sıla, benim hayat arkadaşım olur musun? 💕</h1>
+
+        <p class="subtitle">
+            Bu küçük sürpriz sadece seni gülümsetmek için hazırlandı 🌸
+        </p>
 
         <div class="gif-container">
-            <img id="cat-gif" src="https://media.tenor.com/EBV7OT7ACfwAAAAj/u-u-qua-qua-u-quaa.gif" alt="cute character">
+            <img
+                id="cat-gif"
+                src="https://media.tenor.com/EBV7OT7ACfwAAAAj/u-u-qua-qua-u-quaa.gif"
+                alt="cute character"
+            >
         </div>
 
         <div class="buttons">
-            <button id="yes-btn" onclick="handleYesClick()">Yes</button>
-            <button id="no-btn" onclick="handleNoClick()">No</button>
+            <button id="yes-btn" onclick="handleYesClick()">
+                Evet 💖
+            </button>
+
+            <button id="no-btn" onclick="handleNoClick()">
+                Hayır 🙈
+            </button>
         </div>
+
         <div id="tease-toast"></div>
+
     </div>
 
     <audio id="bg-music" loop autoplay muted>
         <source src="music/beabadoobee - Glue Song (Lyrics).mp3" type="audio/mpeg">
     </audio>
 
-    <button id="music-toggle" onclick="toggleMusic()" title="Toggle music">🔊</button>
+    <button id="music-toggle" onclick="toggleMusic()" title="Müziği Aç/Kapat">
+        🔊
+    </button>
 
-    <script src="script.js"></script>
+    <script>
+
+        let noCount = 0;
+
+        const teaseMessages = [
+            "Sıla emin misin? 🥺",
+            "Bence yanlış butona bastın 🙈",
+            "Kalbim biraz kırıldı ama hâlâ umutluyum 💘",
+            "Hayır dedikçe Evet büyüyor fark ettin mi 😌",
+            "Sılaaa, son kararın mı gerçekten? 🌸",
+            "Bence kaderimiz Evet diyor 💕",
+            "Tamam tamam… artık Evet butonu çok güçlü 😄"
+        ];
+
+        const gifs = [
+            "https://media.tenor.com/EBV7OT7ACfwAAAAj/u-u-qua-qua-u-quaa.gif",
+            "https://media.tenor.com/3x63SNMKPogAAAAj/cute-cat.gif",
+            "https://media.tenor.com/mecndx65bN8AAAAj/cat-cute.gif",
+            "https://media.tenor.com/JfovK8WwKxMAAAAj/love-cat.gif"
+        ];
+
+        function handleNoClick() {
+
+            noCount++;
+
+            const yesBtn = document.getElementById("yes-btn");
+            const noBtn = document.getElementById("no-btn");
+            const toast = document.getElementById("tease-toast");
+            const gif = document.getElementById("cat-gif");
+
+            const scale = 1 + (noCount * 0.25);
+
+            yesBtn.style.transform = `scale(${scale})`;
+
+            toast.innerText =
+                teaseMessages[Math.min(noCount - 1, teaseMessages.length - 1)];
+
+            toast.style.opacity = "1";
+
+            setTimeout(() => {
+                toast.style.opacity = "0";
+            }, 2000);
+
+            gif.src = gifs[noCount % gifs.length];
+
+            if (noCount >= 5) {
+                noBtn.innerText = "Hâlâ mı hayır 😭";
+            }
+
+            if (noCount >= 8) {
+                noBtn.style.position = "relative";
+                noBtn.style.left = `${Math.random() * 100 - 50}px`;
+                noBtn.style.top = `${Math.random() * 60 - 30}px`;
+            }
+        }
+
+        function handleYesClick() {
+
+            document.body.innerHTML = `
+                <div class="success-page">
+                    <h1>YAYYY Sıla 💖</h1>
+
+                    <p>
+                        Dünyanın en güzel “Evet” cevabını aldım 🌸
+                    </p>
+
+                    <img
+                        src="https://media.tenor.com/0AVbKGY_MxMAAAAj/love.gif"
+                        class="success-gif"
+                    >
+
+                    <h2>💘 Akifle mutlu günler 💘</h2>
+                </div>
+            `;
+        }
+
+        function toggleMusic() {
+
+            const music = document.getElementById("bg-music");
+
+            if (music.muted) {
+                music.muted = false;
+                music.play();
+            } else {
+                music.muted = true;
+            }
+        }
+
+    </script>
+
 </body>
 </html>
+```
