@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -6,18 +5,201 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sıla, benim hayat arkadaşım olur musun? 💕</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #ffd1dc, #ff8fab, #ff5c8a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7a003c;
+        }
+
+        .hearts-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            top: -40px;
+            font-size: 24px;
+            animation: fall linear forwards;
+            opacity: 0.85;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            width: min(92vw, 520px);
+            padding: 32px 24px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.75);
+            border-radius: 32px;
+            box-shadow: 0 25px 70px rgba(120, 0, 60, 0.25);
+            backdrop-filter: blur(12px);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 7vw, 3.2rem);
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.05rem;
+            margin-bottom: 22px;
+            color: #9b174d;
+            font-weight: 700;
+        }
+
+        .gif-container img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 24px;
+        }
+
+        .buttons {
+            min-height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            border-radius: 999px;
+            font-weight: 900;
+            transition: 0.2s ease;
+            font-family: inherit;
+        }
+
+        #yes-btn {
+            background: linear-gradient(135deg, #ff2f7d, #ff6aa2);
+            color: white;
+            padding: 16px 32px;
+            font-size: 1.3rem;
+            box-shadow: 0 12px 28px rgba(255, 47, 125, 0.35);
+            z-index: 5;
+        }
+
+        #yes-btn:hover {
+            transform: scale(1.08);
+        }
+
+        #no-btn {
+            background: white;
+            color: #ff2f7d;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            border: 2px solid #ff92bd;
+            z-index: 10;
+        }
+
+        #tease-toast {
+            min-height: 36px;
+            margin-top: 10px;
+            font-weight: 900;
+            color: #c9185a;
+            opacity: 0;
+            transition: 0.25s ease;
+        }
+
+        #music-toggle {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            z-index: 30;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: white;
+            color: #ff2f7d;
+            font-size: 1.4rem;
+            box-shadow: 0 10px 30px rgba(120, 0, 60, 0.2);
+        }
+
+        .success-page {
+            min-height: 100vh;
+            width: 100%;
+            background: linear-gradient(135deg, #fff0f6, #ffb3d1, #ff5c8a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 24px;
+            color: #7a003c;
+        }
+
+        .success-page h1 {
+            font-size: clamp(2.6rem, 9vw, 5rem);
+            margin-bottom: 16px;
+        }
+
+        .success-page p {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .success-gif {
+            width: 220px;
+            max-width: 80vw;
+            margin: 20px 0;
+        }
+
+        .success-page h2 {
+            font-size: 1.6rem;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 520px) {
+            .container {
+                padding: 28px 18px;
+            }
+
+            .buttons {
+                min-height: 160px;
+            }
+
+            .gif-container img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="hearts-bg"></div>
+    <div class="hearts-bg" id="hearts-bg"></div>
 
     <div class="container">
-
         <h1>Sıla, benim hayat arkadaşım olur musun? 💕</h1>
 
         <p class="subtitle">
@@ -43,7 +225,6 @@
         </div>
 
         <div id="tease-toast"></div>
-
     </div>
 
     <audio id="bg-music" loop autoplay muted>
@@ -55,7 +236,6 @@
     </button>
 
     <script>
-
         let noCount = 0;
 
         const teaseMessages = [
@@ -63,9 +243,9 @@
             "Bence yanlış butona bastın 🙈",
             "Kalbim biraz kırıldı ama hâlâ umutluyum 💘",
             "Hayır dedikçe Evet büyüyor fark ettin mi 😌",
-            "Sılaaa, son kararın mı gerçekten? 🌸",
-            "Bence kaderimiz Evet diyor 💕",
-            "Tamam tamam… artık Evet butonu çok güçlü 😄"
+            "Sılaaa, gerçekten hayır mı diyorsun 🌸",
+            "Yakalanamıyorum 😎",
+            "Tamam tamam… artık beni yakalayamazsın 😄"
         ];
 
         const gifs = [
@@ -75,18 +255,35 @@
             "https://media.tenor.com/JfovK8WwKxMAAAAj/love-cat.gif"
         ];
 
-        function handleNoClick() {
+        const noBtn = document.getElementById("no-btn");
 
+        noBtn.addEventListener("mouseenter", moveNoButton);
+        noBtn.addEventListener("touchstart", moveNoButton);
+
+        function handleNoClick() {
+            moveNoButton();
+        }
+
+        function moveNoButton() {
             noCount++;
 
             const yesBtn = document.getElementById("yes-btn");
-            const noBtn = document.getElementById("no-btn");
             const toast = document.getElementById("tease-toast");
             const gif = document.getElementById("cat-gif");
 
-            const scale = 1 + (noCount * 0.25);
+            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
 
+            const randomX = Math.floor(Math.random() * Math.max(maxX, 1));
+            const randomY = Math.floor(Math.random() * Math.max(maxY, 1));
+
+            noBtn.style.position = "fixed";
+            noBtn.style.left = randomX + "px";
+            noBtn.style.top = randomY + "px";
+
+            const scale = 1 + noCount * 0.18;
             yesBtn.style.transform = `scale(${scale})`;
+            yesBtn.style.fontSize = `${1.3 + noCount * 0.08}rem`;
 
             toast.innerText =
                 teaseMessages[Math.min(noCount - 1, teaseMessages.length - 1)];
@@ -95,29 +292,20 @@
 
             setTimeout(() => {
                 toast.style.opacity = "0";
-            }, 2000);
+            }, 1800);
 
             gif.src = gifs[noCount % gifs.length];
 
-            if (noCount >= 5) {
-                noBtn.innerText = "Hâlâ mı hayır 😭";
-            }
-
-            if (noCount >= 8) {
-                noBtn.style.position = "relative";
-                noBtn.style.left = `${Math.random() * 100 - 50}px`;
-                noBtn.style.top = `${Math.random() * 60 - 30}px`;
-            }
+            createHeartBurst(12);
         }
 
         function handleYesClick() {
-
             document.body.innerHTML = `
                 <div class="success-page">
                     <h1>YAYYY Sıla 💖</h1>
 
                     <p>
-                        Dünyanın en güzel “Evet” cevabını aldım 🌸
+                        Dünyanın en güzel “Evet” cevabını en güzel kadından aldım 🌸
                     </p>
 
                     <img
@@ -125,25 +313,55 @@
                         class="success-gif"
                     >
 
-                    <h2>💘 Akifle mutlu günler 💘</h2>
+                    <h2>💘 Hep mutlu ol ve gülümse 💘</h2>
                 </div>
             `;
+
+            createHeartBurst(80);
         }
 
         function toggleMusic() {
-
             const music = document.getElementById("bg-music");
+            const musicBtn = document.getElementById("music-toggle");
 
             if (music.muted) {
                 music.muted = false;
                 music.play();
+                musicBtn.innerText = "🔇";
             } else {
                 music.muted = true;
+                musicBtn.innerText = "🔊";
             }
         }
 
+        function createHeart() {
+            const heartsBg = document.getElementById("hearts-bg");
+
+            if (!heartsBg) return;
+
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerText = ["💖", "💕", "💘", "💝", "❤️"][Math.floor(Math.random() * 5)];
+
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = 3 + Math.random() * 4 + "s";
+            heart.style.fontSize = 16 + Math.random() * 24 + "px";
+
+            heartsBg.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+        function createHeartBurst(count) {
+            for (let i = 0; i < count; i++) {
+                setTimeout(createHeart, i * 35);
+            }
+        }
+
+        setInterval(createHeart, 300);
     </script>
 
 </body>
 </html>
-```
