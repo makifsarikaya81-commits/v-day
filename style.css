@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #FFE4E8;
+    background-color: #dff6ff;
     font-family: 'Nunito', sans-serif;
     min-height: 100vh;
     display: flex;
@@ -13,15 +13,18 @@ body {
     align-items: center;
     overflow: hidden;
     background-image:
-        radial-gradient(circle at 15% 85%, #ffb3c1 0%, transparent 40%),
-        radial-gradient(circle at 85% 15%, #ff8fa3 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, #fff0f3 0%, transparent 60%);
+        radial-gradient(circle at 15% 85%, #7dd3fc 0%, transparent 40%),
+        radial-gradient(circle at 85% 15%, #38bdf8 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, #effaff 0%, transparent 60%);
 }
 
-/* Floating hearts background */
+/* Floating stars & hearts background */
 .hearts-bg {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     pointer-events: none;
     z-index: 0;
     overflow: hidden;
@@ -29,10 +32,10 @@ body {
 
 .hearts-bg::before,
 .hearts-bg::after {
-    content: '💕 💗 💖 💝 💓';
+    content: '⭐ ✨ 💙 🩵 🌺';
     position: absolute;
     font-size: 1.5rem;
-    opacity: 0.15;
+    opacity: 0.18;
     animation: floatHearts 12s linear infinite;
     white-space: nowrap;
     top: 100%;
@@ -42,12 +45,18 @@ body {
 .hearts-bg::after {
     animation-delay: 6s;
     left: 60%;
-    content: '💗 💕 💓 💖 💝';
+    content: '🌊 ⭐ 🩵 ✨ 💙';
 }
 
 @keyframes floatHearts {
-    from { transform: translateY(0); opacity: 0.15; }
-    to { transform: translateY(-110vh); opacity: 0; }
+    from {
+        transform: translateY(0);
+        opacity: .18;
+    }
+    to {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
 }
 
 .container {
@@ -58,17 +67,17 @@ body {
 }
 
 h1 {
-    font-size: 2.4rem;
-    color: #d63384;
+    font-size: 2.5rem;
+    color: #0f4c81;
     font-weight: 900;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 0px rgba(214, 51, 132, 0.2);
+    text-shadow: 2px 2px 0 rgba(15,76,129,.18);
     animation: wiggle 2s ease-in-out infinite;
 }
 
 @keyframes wiggle {
-    0%, 100% { transform: rotate(-1deg); }
-    50% { transform: rotate(1deg); }
+    0%,100% { transform: rotate(-1deg);}
+    50% { transform: rotate(1deg);}
 }
 
 .gif-container {
@@ -78,11 +87,11 @@ h1 {
 }
 
 #cat-gif {
-    width: 200px;
-    height: 200px;
+    width: 210px;
+    height: 210px;
     object-fit: contain;
-    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
-    transition: opacity 0.3s ease;
+    filter: drop-shadow(0 8px 18px rgba(33,150,243,.25));
+    transition: .3s;
 }
 
 .buttons {
@@ -94,113 +103,130 @@ h1 {
     flex-wrap: wrap;
 }
 
+/* EVET */
+
 #yes-btn {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    color: white;
-    border: none;
-    border-radius: 16px;
-    font-size: 1.6rem;
-    font-weight: 900;
-    font-family: 'Nunito', sans-serif;
-    padding: 18px 45px;
-    cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s;
-    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.45);
-    letter-spacing: 1px;
+    background: linear-gradient(135deg,#2196F3,#64B5F6);
+    color:white;
+    border:none;
+    border-radius:16px;
+    font-size:1.6rem;
+    font-weight:900;
+    font-family:'Nunito',sans-serif;
+    padding:18px 45px;
+    cursor:pointer;
+    transition:.18s;
+    box-shadow:0 6px 20px rgba(33,150,243,.45);
 }
 
-#yes-btn:hover {
-    transform: scale(1.06) translateY(-2px);
-    box-shadow: 0 10px 28px rgba(76, 175, 80, 0.55);
+#yes-btn:hover{
+    transform:scale(1.06) translateY(-2px);
+    box-shadow:0 10px 28px rgba(33,150,243,.55);
 }
 
-#yes-btn:active {
-    transform: scale(0.98);
+#yes-btn:active{
+    transform:scale(.98);
 }
 
-#no-btn {
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 700;
-    font-family: 'Nunito', sans-serif;
-    padding: 12px 28px;
-    cursor: pointer;
-    transition: background 0.2s, left 0.25s ease, top 0.25s ease;
-    box-shadow: 0 4px 14px rgba(231, 76, 60, 0.4);
+/* HAYIR */
+
+#no-btn{
+    background:linear-gradient(135deg,#90CAF9,#64B5F6);
+    color:#0f4c81;
+    border:none;
+    border-radius:12px;
+    font-size:1rem;
+    font-weight:700;
+    font-family:'Nunito',sans-serif;
+    padding:12px 28px;
+    cursor:pointer;
+    transition:.25s;
+    box-shadow:0 4px 14px rgba(33,150,243,.35);
 }
 
-#no-btn:hover {
-    background: linear-gradient(135deg, #c0392b, #a93226);
+#no-btn:hover{
+    background:linear-gradient(135deg,#64B5F6,#42A5F5);
 }
 
+/* Mesaj */
 
-#tease-toast {
-    margin-top: 14px;
-    font-size: 1rem;
-    color: #d63384;
-    font-weight: 700;
-    font-style: italic;
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    min-height: 1.5rem;
+#tease-toast{
+    margin-top:14px;
+    font-size:1rem;
+    color:#1565C0;
+    font-weight:700;
+    font-style:italic;
+    opacity:0;
+    transform:translateY(6px);
+    transition:.3s;
+    min-height:1.5rem;
 }
 
-#tease-toast.show {
-    opacity: 1;
-    transform: translateY(0);
+#tease-toast.show{
+    opacity:1;
+    transform:translateY(0);
 }
 
-/* Music toggle button */
-#music-toggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(255, 255, 255, 0.85);
-    border: none;
-    border-radius: 50%;
-    width: 52px;
-    height: 52px;
-    font-size: 1.4rem;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-    transition: transform 0.2s;
-    z-index: 100;
+/* Music */
+
+#music-toggle{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:rgba(255,255,255,.85);
+    border:none;
+    border-radius:50%;
+    width:52px;
+    height:52px;
+    font-size:1.4rem;
+    cursor:pointer;
+    backdrop-filter:blur(10px);
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
+    transition:.2s;
+    z-index:100;
 }
 
-#music-toggle:hover {
-    transform: scale(1.1);
+#music-toggle:hover{
+    transform:scale(1.1);
 }
 
-/* Yes page specific */
-.yes-container h1.yes-title {
-    font-size: 2.8rem;
-    animation: bounceTitle 0.6s ease infinite alternate;
+/* YES PAGE */
+
+.yes-container h1.yes-title{
+    font-size:2.9rem;
+    color:#0f4c81;
+    animation:bounceTitle .6s ease infinite alternate;
 }
 
-@keyframes bounceTitle {
-    from { transform: translateY(0) rotate(-1deg); }
-    to { transform: translateY(-12px) rotate(1deg); }
+@keyframes bounceTitle{
+    from{
+        transform:translateY(0) rotate(-1deg);
+    }
+    to{
+        transform:translateY(-12px) rotate(1deg);
+    }
 }
 
-.yes-message {
-    font-size: 1.4rem;
-    color: #e91e8c;
-    font-weight: 700;
-    margin-top: 24px;
-    animation: fadeIn 1s ease 0.5s both;
+.yes-message{
+    font-size:1.4rem;
+    color:#1565C0;
+    font-weight:700;
+    margin-top:24px;
+    animation:fadeIn 1s ease .5s both;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-.yes-container #cat-gif {
-    width: 260px;
-    height: 260px;
+.yes-container #cat-gif{
+    width:260px;
+    height:260px;
 }
